@@ -43,7 +43,7 @@
 @implementation ZipFile
 
 
-- (id) initWithDestinationFilePath:(NSString *)fileName mode:(ZipFileMode)mode {
+- (id) initWithFilePath:(NSString *)fileName mode:(ZipFileMode)mode {
 	if ((self= [super init])) {
 		_fileName= [fileName copy];
 		_mode= mode;
