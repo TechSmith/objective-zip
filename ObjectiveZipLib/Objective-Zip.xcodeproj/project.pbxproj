@@ -10,22 +10,22 @@
 		EA20847414FD638E00A82683 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EA20847314FD638E00A82683 /* libz.dylib */; };
 		EAA4E3BF14FD56B70025B561 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA4E3BE14FD56B70025B561 /* Foundation.framework */; };
 		EAA4E3E514FD58920025B561 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3D314FD58920025B561 /* ioapi.c */; };
-		EAA4E3E614FD58920025B561 /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3D414FD58920025B561 /* ioapi.h */; };
+		EAA4E3E614FD58920025B561 /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3D414FD58920025B561 /* ioapi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAA4E3E714FD58920025B561 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3D514FD58920025B561 /* mztools.c */; };
-		EAA4E3E814FD58920025B561 /* mztools.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3D614FD58920025B561 /* mztools.h */; };
+		EAA4E3E814FD58920025B561 /* mztools.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3D614FD58920025B561 /* mztools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAA4E3E914FD58920025B561 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3D714FD58920025B561 /* unzip.c */; };
-		EAA4E3EA14FD58920025B561 /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3D814FD58920025B561 /* unzip.h */; };
+		EAA4E3EA14FD58920025B561 /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3D814FD58920025B561 /* unzip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAA4E3EB14FD58920025B561 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3D914FD58920025B561 /* zip.c */; };
-		EAA4E3EC14FD58920025B561 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3DA14FD58920025B561 /* zip.h */; };
-		EAA4E3ED14FD58920025B561 /* FileInZipInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3DB14FD58920025B561 /* FileInZipInfo.h */; };
+		EAA4E3EC14FD58920025B561 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3DA14FD58920025B561 /* zip.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAA4E3ED14FD58920025B561 /* FileInZipInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3DB14FD58920025B561 /* FileInZipInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAA4E3EE14FD58920025B561 /* FileInZipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3DC14FD58920025B561 /* FileInZipInfo.m */; };
-		EAA4E3EF14FD58920025B561 /* ZipException.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3DD14FD58920025B561 /* ZipException.h */; };
+		EAA4E3EF14FD58920025B561 /* ZipException.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3DD14FD58920025B561 /* ZipException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAA4E3F014FD58920025B561 /* ZipException.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3DE14FD58920025B561 /* ZipException.m */; };
-		EAA4E3F114FD58920025B561 /* ZipFile.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3DF14FD58920025B561 /* ZipFile.h */; };
+		EAA4E3F114FD58920025B561 /* ZipFile.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3DF14FD58920025B561 /* ZipFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAA4E3F214FD58920025B561 /* ZipFile.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3E014FD58920025B561 /* ZipFile.m */; };
-		EAA4E3F314FD58920025B561 /* ZipReadStream.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3E114FD58920025B561 /* ZipReadStream.h */; };
+		EAA4E3F314FD58920025B561 /* ZipReadStream.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3E114FD58920025B561 /* ZipReadStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAA4E3F414FD58920025B561 /* ZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3E214FD58920025B561 /* ZipReadStream.m */; };
-		EAA4E3F514FD58920025B561 /* ZipWriteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3E314FD58920025B561 /* ZipWriteStream.h */; };
+		EAA4E3F514FD58920025B561 /* ZipWriteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3E314FD58920025B561 /* ZipWriteStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAA4E3F614FD58920025B561 /* ZipWriteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3E414FD58920025B561 /* ZipWriteStream.m */; };
 /* End PBXBuildFile section */
 
@@ -162,9 +162,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAA4E3C814FD56B70025B561 /* Build configuration list for PBXNativeTarget "Objective-Zip" */;
 			buildPhases = (
+				EAA4E3B914FD56B70025B561 /* Headers */,
 				EAA4E3B714FD56B70025B561 /* Sources */,
 				EAA4E3B814FD56B70025B561 /* Frameworks */,
-				EAA4E3B914FD56B70025B561 /* Headers */,
 			);
 			buildRules = (
 			);
