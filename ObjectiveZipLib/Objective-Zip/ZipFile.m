@@ -50,7 +50,7 @@
 		
 		switch (mode) {
 			case ZipFileModeUnzip:
-				_unzFile= unzOpen([_fileName cStringUsingEncoding:NSUTF8StringEncoding]);
+				_unzFile= unzOpen64([_fileName cStringUsingEncoding:NSUTF8StringEncoding]);
 				if (_unzFile == NULL) {
 					NSString *reason= [NSString stringWithFormat:@"Can't open '%@'", _fileName];
 					@throw [[ZipException alloc] initWithReason:reason];
@@ -58,7 +58,7 @@
 				break;
 				
 			case ZipFileModeCreate:
-				_zipFile= zipOpen([_fileName cStringUsingEncoding:NSUTF8StringEncoding], APPEND_STATUS_CREATE);
+				_zipFile= zipOpen64([_fileName cStringUsingEncoding:NSUTF8StringEncoding], APPEND_STATUS_CREATE);
 				if (_zipFile == NULL) {
 					NSString *reason= [NSString stringWithFormat:@"Can't open '%@'", _fileName];
 					@throw [[ZipException alloc] initWithReason:reason];
@@ -66,7 +66,7 @@
 				break;
 				
 			case ZipFileModeAppend:
-				_zipFile= zipOpen([_fileName cStringUsingEncoding:NSUTF8StringEncoding], APPEND_STATUS_ADDINZIP);
+				_zipFile= zipOpen64([_fileName cStringUsingEncoding:NSUTF8StringEncoding], APPEND_STATUS_ADDINZIP);
 				if (_zipFile == NULL) {
 					NSString *reason= [NSString stringWithFormat:@"Can't open '%@'", _fileName];
 					@throw [[ZipException alloc] initWithReason:reason];
@@ -104,7 +104,7 @@
 	zi.external_fa= 0;
 	zi.dosDate= 0;
 	
-	int err= zipOpenNewFileInZip3(
+	int err= zipOpenNewFileInZip3_64(
                                  _zipFile,
                                  [fileNameInZip cStringUsingEncoding:NSUTF8StringEncoding],
                                  &zi,
@@ -140,7 +140,7 @@
 	zi.external_fa= 0;
 	zi.dosDate= 0;
 	
-	int err= zipOpenNewFileInZip3(
+	int err= zipOpenNewFileInZip3_64(
                                  _zipFile,
                                  [fileNameInZip cStringUsingEncoding:NSUTF8StringEncoding],
                                  &zi,
@@ -176,7 +176,7 @@
 	zi.external_fa= 0;
 	zi.dosDate= 0;
 	
-	int err= zipOpenNewFileInZip3(
+	int err= zipOpenNewFileInZip3_64(
                                  _zipFile,
                                  [fileNameInZip cStringUsingEncoding:NSUTF8StringEncoding],
                                  &zi,
