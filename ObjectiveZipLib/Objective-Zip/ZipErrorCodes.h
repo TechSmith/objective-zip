@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
+#define NEVER_TRANSLATE(x) x
 
 // kOZCEC_ - konstant Objective-Zip Common Error Code
 // kOZCEM_ - konstant Objective-Zip Common Error Message
@@ -16,68 +17,68 @@
 
 
 // common error codes
-static NSString * kOZCEM_ZipErrorDomain = @"ZipErrorDomain";
+extern NSString * kOZCEM_ZipErrorDomain;
 
 static NSInteger  kOZCEC_UserCancelledError = -128;
-static NSString * kOZCEM_UserCancelledError = @"User cancelled error";
+extern NSString * kOZCEM_UserCancelledError;
 
 static NSInteger  kOZCEC_IndeterminateError = 90;
-static NSString * kOZCEM_IndeterminateError = @"Unknown failure";
+extern NSString * kOZCEM_IndeterminateError;
 
 static NSInteger  kOZCEC_NotEnoughDiskSpace = 98;
-static NSString * kOZCEM_NotEnoughDiskSpace = @"Not enough disk space at requested location";
+extern NSString * kOZCEM_NotEnoughDiskSpace;
 
 static NSInteger  kOZCEC_CannotReadSystemFolderAttributes = 99;
-static NSString * kOZCEM_CannotReadSystemFolderAttributes = @"Cannot read folder attributes to verify disk space";
+extern NSString * kOZCEM_CannotReadSystemFolderAttributes;
 
 
 
 // zip error codes
 
 static NSInteger  kOZEC_WriteStreamCreationError = 100;
-static NSString * kOZEM_WriteStreamCreationError = @"Failed to create write stream for zip file";
+extern NSString * kOZEM_WriteStreamCreationError;
 
 static NSInteger  kOZEC_ZeroLengthFileNames = 101;
-static NSString * kOZEM_ZeroLengthFileNames = @"Cannot create a zip file with file names of zero length";
+extern NSString * kOZEM_ZeroLengthFileNames;
 
 static NSInteger  kOZEC_DuplicateFileNames = 102;
-static NSString * kOZEM_DuplicateFileNames = @"Cannot create a zip file with duplicate file names";
+extern NSString * kOZEM_DuplicateFileNames;
 
 static NSInteger  kOZEC_ZipLocationIsFile = 103;
-static NSString * kOZEM_ZipLocationIsFile = @"Cannot create a zip file at requested location (is a file, not a folder)";
+extern NSString * kOZEM_ZipLocationIsFile;
 
 static NSInteger  kOZEC_ZipLocationDoesNotExist = 104;
-static NSString * kOZEM_ZipLocationDoesNotExist = @"Requested location for zip file does not exist";
+extern NSString * kOZEM_ZipLocationDoesNotExist;
 
 static NSInteger  kOZEC_ZipLocationReadOnly = 105;
-static NSString * kOZEM_ZipLocationReadOnly = @"Requested location for zip file is read only";
+extern NSString * kOZEM_ZipLocationReadOnly;
 
 static NSInteger  kOZEC_ReadDataFailure = 106;
-static NSString * kOZEM_ReadDataFailure = @"Failed to read data to add to zip file";
+extern NSString * kOZEM_ReadDataFailure;
 
 static NSInteger  kOZEC_fileCouldNotBeOpenedForReading = 107;
-static NSString * kOZEM_fileCouldNotBeOpenedForReading = @"A file to be added to the zip file could not be opened for reading";
+extern NSString * kOZEM_fileCouldNotBeOpenedForReading;
 
 
 
 // unzip error codes
 
 static NSInteger  kOUZEC_PathDoesNotExist = 120;
-static NSString * kOUZEM_PathDoesNotExist = @"Extraction path does not exist";
+extern NSString * kOUZEM_PathDoesNotExist;
 
 static NSInteger  kOUZEC_CannotCreateFolder = 121;
-static NSString * kOUZEM_CannotCreateFolder = @"Could not create folder to extract files into";
+extern NSString * kOUZEM_CannotCreateFolder;
 
 static NSInteger  kOUZEC_CannotCreateExtractionQueue = 122;
-static NSString * kOUZEM_CannotCreateExtractionQueue = @"Failed to get a system queue to extract data from zip file";
+extern NSString * kOUZEM_CannotCreateExtractionQueue;
 
 static NSInteger  kOUZEC_CannotFindInfoForFileInArchive = 123;
-static NSString * kOUZEM_CannotFindInfoForFileInArchive = @"File does not exist in archive";
+extern NSString * kOUZEM_CannotFindInfoForFileInArchive;
 
 static NSInteger  kOUZEC_fileAlreadyExists = 124;
-static NSString * kOUZEM_fileAlreadyExists = @"During file extraction the file to be written already exists";
+extern NSString * kOUZEM_fileAlreadyExists;
 
 static NSInteger  kOUZEC_fileCouldNotBeOpenedForWriting = 125;
-static NSString * kOUZEM_fileCouldNotBeOpenedForWriting = @"During file extraction the file to be written could not be opened for writing";
+extern NSString * kOUZEM_fileCouldNotBeOpenedForWriting;
 
 

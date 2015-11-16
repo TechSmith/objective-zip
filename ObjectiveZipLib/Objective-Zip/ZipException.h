@@ -33,6 +33,7 @@
 
 #import <Foundation/Foundation.h>
 
+#define NEVER_TRANSLATE(x) x
 
 @interface ZipException : NSException {
 	
