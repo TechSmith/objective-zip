@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
+#define NEVER_TRANSLATE(x) x
 
 // kOZCEC_ - konstant Objective-Zip Common Error Code
 // kOZCEM_ - konstant Objective-Zip Common Error Message

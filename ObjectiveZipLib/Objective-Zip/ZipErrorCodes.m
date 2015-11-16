@@ -16,7 +16,7 @@
 
 
 // common error codes
-NSString * kOZCEM_ZipErrorDomain = @"ZipErrorDomain";
+NSString * kOZCEM_ZipErrorDomain = NEVER_TRANSLATE(@"ZipErrorDomain");
 
 NSString * kOZCEM_UserCancelledError = NSLocalizedString(@"User cancelled error", @"Message for user cancelled");
 
