@@ -52,10 +52,19 @@
    return self;
 }
 
+-(void) dealloc
+{
+   if ( _internalFile != nil )
+   {
+      zip_fclose(_internalFile);
+   }
+}
+
 -(void) finishedReading
 {
    
 }
+
 -(NSData *) readDataOfLength:(NSUInteger)length
 {
    NSMutableData *data = [NSMutableData dataWithLength:length];

@@ -55,6 +55,7 @@ typedef enum {
 @class ZipWriteStream;
 @class FileInZipInfo;
 @class LibZipReadStream;
+@class LibZipWriteStream;
 
 @interface ZipFile : NSObject {
 	NSString *_fileName;
@@ -77,13 +78,13 @@ typedef enum {
 
 - (BOOL) locateFileInZip:(NSString *)fileNameInZip;
 
-- (FileInZipInfo *) getCurrentFileInZipInfo;
-
-- (ZipReadStream *) readCurrentFileInZip;
-- (ZipReadStream *) readCurrentFileInZipWithPassword:(NSString *)password;
-
 - (LibZipReadStream *) openReadStreamForName:(NSString *) filename;
 - (LibZipReadStream *) openReadStreamForIndex:(int) index;
+
+- (BOOL) writeStreamWithName:(NSString *) filename compressionLevel:(ZipCompressionLevel)compressionLevel;
+- (BOOL) writeFile:(NSString *) filepath
+          withName:(NSString *) name
+  compressionLevel:(ZipCompressionLevel)compressionLevel;
 
 - (void) close;
 

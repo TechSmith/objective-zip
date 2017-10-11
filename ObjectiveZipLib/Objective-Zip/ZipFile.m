@@ -35,6 +35,7 @@
 
 #import "FileInZipInfo.h"
 #import "LibZipReadStream.h"
+#import "LibZipWriteStream.h"
 #import "ZipErrorCodes.h"
 #import "ZipException.h"
 #import "ZipReadStream.h"
@@ -65,8 +66,8 @@
 				break;
 				
 			case ZipFileModeCreate:
-				_zipFile= zipOpen64([_fileName cStringUsingEncoding:NSUTF8StringEncoding], APPEND_STATUS_CREATE);
-				if (_zipFile == NULL) {
+            _libZipFile= zip_open([_fileName cStringUsingEncoding:NSUTF8StringEncoding], ZIP_CREATE|ZIP_TRUNCATE, &libzipError);
+				if (_libZipFile == NULL) {
 					NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OZCEM_CannotCreateZipFile,
                                   _fileName];
 					@throw [[ZipException alloc] initWithReason:reason];
@@ -74,8 +75,8 @@
 				break;
 				
 			case ZipFileModeAppend:
-				_zipFile= zipOpen64([_fileName cStringUsingEncoding:NSUTF8StringEncoding], APPEND_STATUS_ADDINZIP);
-				if (_zipFile == NULL) {
+            _libZipFile= zip_open([_fileName cStringUsingEncoding:NSUTF8StringEncoding], 0, &libzipError);
+            if (_libZipFile == NULL) {
 					NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OZCEM_CannotOpenZipFile,
                                   _fileName];
 					@throw [[ZipException alloc] initWithReason:reason];
@@ -350,7 +351,7 @@
 		}
 			
 		case ZipFileModeCreate: {
-			int err= zipClose(_zipFile, NULL);
+         int err = zip_close(_libZipFile);
 			if (err != ZIP_OK) {
 				NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OZCEM_CannotCloseZipFile,
                                _fileName];
@@ -360,7 +361,7 @@
 		}
 			
 		case ZipFileModeAppend: {
-			int err= zipClose(_zipFile, NULL);
+         int err = zip_close(_libZipFile);
 			if (err != ZIP_OK) {
             NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OZCEM_CannotCloseZipFile,
                                _fileName];
@@ -387,5 +388,27 @@
 {
    return [[LibZipReadStream alloc] initWithZipFile:_libZipFile
                                    index:index];
+}
+
+- (BOOL) writeStreamWithName:(NSString *) filename compressionLevel:(ZipCompressionLevel)compressionLevel
+{
+   return NO;
+}
+
+- (BOOL) writeFile:(NSString *) filepath
+          withName:(NSString *) name
+  compressionLevel:(ZipCompressionLevel)compressionLevel
+{
+   zip_source_t * source = zip_source_file(_libZipFile, [filepath UTF8String], 0, 0);
+   zip_int64_t index = zip_file_add(_libZipFile, [name UTF8String], source, 0);
+   if ( index >= 0 )
+   {
+      int libzipError;
+
+      zip_set_file_compression(_libZipFile, index, ZIP_CM_STORE, 1);
+      zip_close(_libZipFile);
+      _libZipFile= zip_open([_fileName cStringUsingEncoding:NSUTF8StringEncoding], 0, &libzipError);
+   }
+   return index >= 0;
 }
 @end

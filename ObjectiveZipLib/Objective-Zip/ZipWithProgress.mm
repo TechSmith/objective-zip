@@ -4,6 +4,7 @@
 
 #import "ZipWithProgress.h"
 
+#import "LibZipWriteStream.h"
 #import "ZipErrorCodes.h"
 #import "ZipException.h"
 #import "ZipFile.h"
@@ -68,24 +69,25 @@
       
       if ([_zipDelegate respondsToSelector:@selector(updateCurrentFile:)])
          [_zipDelegate  updateCurrentFile:sourceFileName];
-         
-      ZipWriteStream * writeStream = [_zipTool writeFileInZipWithName:fileinArchiveName
+      
+      BOOL result = [_zipTool writeFile:sourceFileName.path
+                               withName:fileinArchiveName
                                                      compressionLevel:ZipCompressionLevelNone];
-      if (writeStream)
+      if (result)
       {
-         [self writeStream:writeStream
-                   fromURL:sourceFileName
-            singleFileOnly:NO];
-         
-         [writeStream finishedWriting];
-         
-         if (_zipFileError != nil) break;
-         
-         if (self.cancelOperation)
-         {
-            [self setCancelErrorAndCleanup];
-            break;
-         }
+//         [self writeStream:writeStream
+//                   fromURL:sourceFileName
+//            singleFileOnly:NO];
+//         
+//         [writeStream finishedWriting];
+//         
+//         if (_zipFileError != nil) break;
+//         
+//         if (self.cancelOperation)
+//         {
+//            [self setCancelErrorAndCleanup];
+//            break;
+//         }
       }
       else
       {
@@ -268,7 +270,7 @@
    
    unsigned long long spaceNeeded = [self totalSourceFileSize];
    
-   return [self insureAdequateDiskSpaceInFolder:_zipFileURL
+   return [self insureAdequateDiskSpaceInFolder:[_zipFileURL URLByDeletingLastPathComponent]
                                         forSize:spaceNeeded
                              andFreeSpaceBuffer:freeSpaceBuffer];
 }

@@ -96,6 +96,12 @@
 		5AFD5B461F8D4FD100D87284 /* LibZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */; };
 		5AFD5B471F8D4FD100D87284 /* LibZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */; };
 		5AFD5B481F8D4FD100D87284 /* LibZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */; };
+		5AFD5B4B1F8E386E00D87284 /* LibZipWriteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B491F8E386E00D87284 /* LibZipWriteStream.m */; };
+		5AFD5B4C1F8E386E00D87284 /* LibZipWriteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AFD5B4A1F8E386E00D87284 /* LibZipWriteStream.h */; };
+		5AFD5B4D1F8E41A200D87284 /* LibZipWriteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B491F8E386E00D87284 /* LibZipWriteStream.m */; };
+		5AFD5B4E1F8E41A200D87284 /* LibZipWriteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B491F8E386E00D87284 /* LibZipWriteStream.m */; };
+		5AFD5B4F1F8E41A300D87284 /* LibZipWriteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B491F8E386E00D87284 /* LibZipWriteStream.m */; };
+		5AFD5B501F8E41A300D87284 /* LibZipWriteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B491F8E386E00D87284 /* LibZipWriteStream.m */; };
 		EAA4E3BF14FD56B70025B561 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA4E3BE14FD56B70025B561 /* Foundation.framework */; };
 		EAA4E3E514FD58920025B561 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3D314FD58920025B561 /* ioapi.c */; };
 		EAA4E3E614FD58920025B561 /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3D414FD58920025B561 /* ioapi.h */; };
@@ -183,6 +189,8 @@
 		5AFD5B071F8CF57700D87284 /* libzip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libzip.framework; path = LibZip/libzip.framework; sourceTree = "<group>"; };
 		5AFD5B3D1F8D4FD100D87284 /* LibZipReadStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibZipReadStream.h; sourceTree = "<group>"; };
 		5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibZipReadStream.m; sourceTree = "<group>"; };
+		5AFD5B491F8E386E00D87284 /* LibZipWriteStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibZipWriteStream.m; sourceTree = "<group>"; };
+		5AFD5B4A1F8E386E00D87284 /* LibZipWriteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibZipWriteStream.h; sourceTree = "<group>"; };
 		EAA4E3BB14FD56B70025B561 /* libObjective-Zip.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libObjective-Zip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA4E3BE14FD56B70025B561 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EAA4E3C214FD56B70025B561 /* Objective-Zip-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objective-Zip-Prefix.pch"; sourceTree = "<group>"; };
@@ -329,6 +337,8 @@
 		EAA4E3D214FD58920025B561 /* Objective-Zip */ = {
 			isa = PBXGroup;
 			children = (
+				5AFD5B491F8E386E00D87284 /* LibZipWriteStream.m */,
+				5AFD5B4A1F8E386E00D87284 /* LibZipWriteStream.h */,
 				EAA4E3DB14FD58920025B561 /* FileInZipInfo.h */,
 				EAA4E3DC14FD58920025B561 /* FileInZipInfo.m */,
 				03510FE11B1CB578007EA388 /* ProgressDelegate.h */,
@@ -411,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAA4E3E614FD58920025B561 /* ioapi.h in Headers */,
+				5AFD5B4C1F8E386E00D87284 /* LibZipWriteStream.h in Headers */,
 				EAA4E3EA14FD58920025B561 /* unzip.h in Headers */,
 				03510FDD1B1CB4CE007EA388 /* UnzipWithProgress.h in Headers */,
 				5A4657411F79920A0052E3B0 /* UnzipFileDelegate.h in Headers */,
@@ -623,6 +634,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0335848F1C1B371700F9F7F1 /* ioapi.c in Sources */,
+				5AFD5B4F1F8E41A300D87284 /* LibZipWriteStream.m in Sources */,
 				033584901C1B371700F9F7F1 /* unzip.c in Sources */,
 				033584911C1B371700F9F7F1 /* zip.c in Sources */,
 				5AFD5B471F8D4FD100D87284 /* LibZipReadStream.m in Sources */,
@@ -643,6 +655,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				033584FC1C1B602400F9F7F1 /* ioapi.c in Sources */,
+				5AFD5B501F8E41A300D87284 /* LibZipWriteStream.m in Sources */,
 				033584FD1C1B602400F9F7F1 /* unzip.c in Sources */,
 				033584FE1C1B602400F9F7F1 /* zip.c in Sources */,
 				5AFD5B481F8D4FD100D87284 /* LibZipReadStream.m in Sources */,
@@ -663,6 +676,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAA4E3E514FD58920025B561 /* ioapi.c in Sources */,
+				5AFD5B4B1F8E386E00D87284 /* LibZipWriteStream.m in Sources */,
 				EAA4E3E914FD58920025B561 /* unzip.c in Sources */,
 				EAA4E3EB14FD58920025B561 /* zip.c in Sources */,
 				5AFD5B441F8D4FD100D87284 /* LibZipReadStream.m in Sources */,
@@ -683,6 +697,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED2982171BD6C4430034E973 /* ioapi.c in Sources */,
+				5AFD5B4E1F8E41A200D87284 /* LibZipWriteStream.m in Sources */,
 				ED2982181BD6C4430034E973 /* unzip.c in Sources */,
 				ED2982191BD6C4430034E973 /* zip.c in Sources */,
 				5AFD5B461F8D4FD100D87284 /* LibZipReadStream.m in Sources */,
@@ -703,6 +718,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED4430AD1B191090007A3256 /* ioapi.c in Sources */,
+				5AFD5B4D1F8E41A200D87284 /* LibZipWriteStream.m in Sources */,
 				ED4430AF1B191090007A3256 /* unzip.c in Sources */,
 				ED4430B01B191090007A3256 /* zip.c in Sources */,
 				5AFD5B451F8D4FD100D87284 /* LibZipReadStream.m in Sources */,
