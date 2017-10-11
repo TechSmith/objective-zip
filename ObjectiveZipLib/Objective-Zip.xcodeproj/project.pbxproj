@@ -81,6 +81,21 @@
 		5A4657431F7992290052E3B0 /* UnzipFileDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A4657401F79907E0052E3B0 /* UnzipFileDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5A4657441F7992290052E3B0 /* UnzipFileDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A4657401F79907E0052E3B0 /* UnzipFileDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5A4657451F79922A0052E3B0 /* UnzipFileDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A4657401F79907E0052E3B0 /* UnzipFileDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5AFD5B081F8CF57700D87284 /* libzip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AFD5B071F8CF57700D87284 /* libzip.framework */; };
+		5AFD5B091F8CF57700D87284 /* libzip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AFD5B071F8CF57700D87284 /* libzip.framework */; };
+		5AFD5B0A1F8CF57700D87284 /* libzip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AFD5B071F8CF57700D87284 /* libzip.framework */; };
+		5AFD5B0B1F8CF57700D87284 /* libzip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AFD5B071F8CF57700D87284 /* libzip.framework */; };
+		5AFD5B0C1F8CF57700D87284 /* libzip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AFD5B071F8CF57700D87284 /* libzip.framework */; };
+		5AFD5B3F1F8D4FD100D87284 /* LibZipReadStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AFD5B3D1F8D4FD100D87284 /* LibZipReadStream.h */; };
+		5AFD5B401F8D4FD100D87284 /* LibZipReadStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AFD5B3D1F8D4FD100D87284 /* LibZipReadStream.h */; };
+		5AFD5B411F8D4FD100D87284 /* LibZipReadStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AFD5B3D1F8D4FD100D87284 /* LibZipReadStream.h */; };
+		5AFD5B421F8D4FD100D87284 /* LibZipReadStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AFD5B3D1F8D4FD100D87284 /* LibZipReadStream.h */; };
+		5AFD5B431F8D4FD100D87284 /* LibZipReadStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AFD5B3D1F8D4FD100D87284 /* LibZipReadStream.h */; };
+		5AFD5B441F8D4FD100D87284 /* LibZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */; };
+		5AFD5B451F8D4FD100D87284 /* LibZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */; };
+		5AFD5B461F8D4FD100D87284 /* LibZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */; };
+		5AFD5B471F8D4FD100D87284 /* LibZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */; };
+		5AFD5B481F8D4FD100D87284 /* LibZipReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */; };
 		EAA4E3BF14FD56B70025B561 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAA4E3BE14FD56B70025B561 /* Foundation.framework */; };
 		EAA4E3E514FD58920025B561 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = EAA4E3D314FD58920025B561 /* ioapi.c */; };
 		EAA4E3E614FD58920025B561 /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = EAA4E3D414FD58920025B561 /* ioapi.h */; };
@@ -165,6 +180,9 @@
 		03510FFE1B21CF8D007EA388 /* ZipProgressBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipProgressBase.mm; sourceTree = "<group>"; };
 		03E2DDBF1B384E7B00DB2E61 /* ZipErrorCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipErrorCodes.h; sourceTree = "<group>"; };
 		5A4657401F79907E0052E3B0 /* UnzipFileDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnzipFileDelegate.h; sourceTree = "<group>"; };
+		5AFD5B071F8CF57700D87284 /* libzip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libzip.framework; path = LibZip/libzip.framework; sourceTree = "<group>"; };
+		5AFD5B3D1F8D4FD100D87284 /* LibZipReadStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibZipReadStream.h; sourceTree = "<group>"; };
+		5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibZipReadStream.m; sourceTree = "<group>"; };
 		EAA4E3BB14FD56B70025B561 /* libObjective-Zip.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libObjective-Zip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA4E3BE14FD56B70025B561 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EAA4E3C214FD56B70025B561 /* Objective-Zip-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objective-Zip-Prefix.pch"; sourceTree = "<group>"; };
@@ -197,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AFD5B0B1F8CF57700D87284 /* libzip.framework in Frameworks */,
 				033584AA1C1B5C6400F9F7F1 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +224,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AFD5B0C1F8CF57700D87284 /* libzip.framework in Frameworks */,
 				033585081C1B602400F9F7F1 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AFD5B081F8CF57700D87284 /* libzip.framework in Frameworks */,
 				EAA4E3BF14FD56B70025B561 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,6 +242,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AFD5B0A1F8CF57700D87284 /* libzip.framework in Frameworks */,
 				ED2982231BD6C4430034E973 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AFD5B091F8CF57700D87284 /* libzip.framework in Frameworks */,
 				ED4430B81B191090007A3256 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,9 +259,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5AFD58241F8C1E6900D87284 /* LibZip */ = {
+			isa = PBXGroup;
+			children = (
+				5AFD5B071F8CF57700D87284 /* libzip.framework */,
+			);
+			name = LibZip;
+			sourceTree = "<group>";
+		};
 		EAA4E3B014FD56B70025B561 = {
 			isa = PBXGroup;
 			children = (
+				5AFD58241F8C1E6900D87284 /* LibZip */,
 				EAA4E3D114FD58920025B561 /* MiniZip */,
 				EAA4E3D214FD58920025B561 /* Objective-Zip */,
 				EAA4E3C114FD56B70025B561 /* Supporting Files */,
@@ -317,6 +349,8 @@
 				EAA4E3E314FD58920025B561 /* ZipWriteStream.h */,
 				EAA4E3E414FD58920025B561 /* ZipWriteStream.m */,
 				5A4657401F79907E0052E3B0 /* UnzipFileDelegate.h */,
+				5AFD5B3D1F8D4FD100D87284 /* LibZipReadStream.h */,
+				5AFD5B3E1F8D4FD100D87284 /* LibZipReadStream.m */,
 			);
 			path = "Objective-Zip";
 			sourceTree = "<group>";
@@ -336,6 +370,7 @@
 				033584A41C1B396D00F9F7F1 /* crypt.h in Headers */,
 				033584A31C1B38D900F9F7F1 /* ZipWriteStream.h in Headers */,
 				033584A01C1B389E00F9F7F1 /* ZipProgressBase.h in Headers */,
+				5AFD5B421F8D4FD100D87284 /* LibZipReadStream.h in Headers */,
 				0335849F1C1B388300F9F7F1 /* ZipFile.h in Headers */,
 				0335849B1C1B384500F9F7F1 /* ProgressDelegate.h in Headers */,
 				5A4657441F7992290052E3B0 /* UnzipFileDelegate.h in Headers */,
@@ -359,6 +394,7 @@
 				0335850E1C1B602400F9F7F1 /* crypt.h in Headers */,
 				0335850F1C1B602400F9F7F1 /* ZipWriteStream.h in Headers */,
 				033585101C1B602400F9F7F1 /* ZipProgressBase.h in Headers */,
+				5AFD5B431F8D4FD100D87284 /* LibZipReadStream.h in Headers */,
 				033585121C1B602400F9F7F1 /* ZipFile.h in Headers */,
 				033585131C1B602400F9F7F1 /* ProgressDelegate.h in Headers */,
 				5A4657451F79922A0052E3B0 /* UnzipFileDelegate.h in Headers */,
@@ -384,6 +420,7 @@
 				EAA4E3EC14FD58920025B561 /* zip.h in Headers */,
 				EAA4E3ED14FD58920025B561 /* FileInZipInfo.h in Headers */,
 				03E2DDC01B384E7B00DB2E61 /* ZipErrorCodes.h in Headers */,
+				5AFD5B3F1F8D4FD100D87284 /* LibZipReadStream.h in Headers */,
 				EAA4E3EF14FD58920025B561 /* ZipException.h in Headers */,
 				EAA4E3F114FD58920025B561 /* ZipFile.h in Headers */,
 				EAA4E3F314FD58920025B561 /* ZipReadStream.h in Headers */,
@@ -406,6 +443,7 @@
 				ED29822B1BD6C4430034E973 /* ProgressDelegate.h in Headers */,
 				ED29822C1BD6C4430034E973 /* ZipReadStream.h in Headers */,
 				ED29822D1BD6C4430034E973 /* ZipErrorCodes.h in Headers */,
+				5AFD5B411F8D4FD100D87284 /* LibZipReadStream.h in Headers */,
 				ED29822E1BD6C4430034E973 /* ZipWriteStream.h in Headers */,
 				ED29822F1BD6C4430034E973 /* ZipWithProgress.h in Headers */,
 				ED2982301BD6C4430034E973 /* ioapi.h in Headers */,
@@ -428,6 +466,7 @@
 				03510FE31B1CB578007EA388 /* ProgressDelegate.h in Headers */,
 				ED4430C11B191090007A3256 /* ZipReadStream.h in Headers */,
 				03E2DDC11B384E7B00DB2E61 /* ZipErrorCodes.h in Headers */,
+				5AFD5B401F8D4FD100D87284 /* LibZipReadStream.h in Headers */,
 				ED4430C21B191090007A3256 /* ZipWriteStream.h in Headers */,
 				ED4430C31B191090007A3256 /* ZipWithProgress.h in Headers */,
 				ED4430BA1B191090007A3256 /* ioapi.h in Headers */,
@@ -586,6 +625,7 @@
 				0335848F1C1B371700F9F7F1 /* ioapi.c in Sources */,
 				033584901C1B371700F9F7F1 /* unzip.c in Sources */,
 				033584911C1B371700F9F7F1 /* zip.c in Sources */,
+				5AFD5B471F8D4FD100D87284 /* LibZipReadStream.m in Sources */,
 				033584921C1B371700F9F7F1 /* FileInZipInfo.m in Sources */,
 				033584931C1B371700F9F7F1 /* UnzipWithProgress.mm in Sources */,
 				033584941C1B371700F9F7F1 /* ZipException.m in Sources */,
@@ -605,6 +645,7 @@
 				033584FC1C1B602400F9F7F1 /* ioapi.c in Sources */,
 				033584FD1C1B602400F9F7F1 /* unzip.c in Sources */,
 				033584FE1C1B602400F9F7F1 /* zip.c in Sources */,
+				5AFD5B481F8D4FD100D87284 /* LibZipReadStream.m in Sources */,
 				033584FF1C1B602400F9F7F1 /* FileInZipInfo.m in Sources */,
 				033585001C1B602400F9F7F1 /* UnzipWithProgress.mm in Sources */,
 				033585011C1B602400F9F7F1 /* ZipException.m in Sources */,
@@ -624,6 +665,7 @@
 				EAA4E3E514FD58920025B561 /* ioapi.c in Sources */,
 				EAA4E3E914FD58920025B561 /* unzip.c in Sources */,
 				EAA4E3EB14FD58920025B561 /* zip.c in Sources */,
+				5AFD5B441F8D4FD100D87284 /* LibZipReadStream.m in Sources */,
 				ED4430AA1B18CFDF007A3256 /* ZipWithProgress.mm in Sources */,
 				EAA4E3EE14FD58920025B561 /* FileInZipInfo.m in Sources */,
 				03510FDF1B1CB4CE007EA388 /* UnzipWithProgress.mm in Sources */,
@@ -643,6 +685,7 @@
 				ED2982171BD6C4430034E973 /* ioapi.c in Sources */,
 				ED2982181BD6C4430034E973 /* unzip.c in Sources */,
 				ED2982191BD6C4430034E973 /* zip.c in Sources */,
+				5AFD5B461F8D4FD100D87284 /* LibZipReadStream.m in Sources */,
 				ED29821A1BD6C4430034E973 /* ZipWithProgress.mm in Sources */,
 				ED29821B1BD6C4430034E973 /* FileInZipInfo.m in Sources */,
 				ED29821C1BD6C4430034E973 /* UnzipWithProgress.mm in Sources */,
@@ -662,6 +705,7 @@
 				ED4430AD1B191090007A3256 /* ioapi.c in Sources */,
 				ED4430AF1B191090007A3256 /* unzip.c in Sources */,
 				ED4430B01B191090007A3256 /* zip.c in Sources */,
+				5AFD5B451F8D4FD100D87284 /* LibZipReadStream.m in Sources */,
 				ED4430B11B191090007A3256 /* ZipWithProgress.mm in Sources */,
 				ED4430B21B191090007A3256 /* FileInZipInfo.m in Sources */,
 				03510FE01B1CB4CE007EA388 /* UnzipWithProgress.mm in Sources */,
@@ -701,6 +745,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -749,6 +797,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -797,6 +849,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -843,6 +899,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -900,6 +960,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -957,6 +1021,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -994,6 +1062,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = "HAVE_CONFIG_H=1";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1011,6 +1080,10 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/ObjectiveZipLib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Objective-Zip-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -1029,10 +1102,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "HAVE_CONFIG_H=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
@@ -1052,7 +1122,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_PREPROCESSOR_DEFINITIONS = "NDEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = "HAVE_CONFIG_H=1";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1070,6 +1140,10 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/ObjectiveZipLib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Objective-Zip-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -1085,6 +1159,10 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/ObjectiveZipLib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Objective-Zip-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -1103,6 +1181,10 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DSTROOT = /tmp/ObjectiveZipLib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Objective-Zip-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1125,6 +1207,10 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DSTROOT = /tmp/ObjectiveZipLib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Objective-Zip-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1147,6 +1233,10 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DSTROOT = /tmp/ObjectiveZipLib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Objective-Zip-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1169,6 +1259,10 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DSTROOT = /tmp/ObjectiveZipLib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Objective-Zip-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -1187,6 +1281,10 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DSTROOT = /tmp/ObjectiveZipLib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Objective-Zip-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -1205,6 +1303,10 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DSTROOT = /tmp/ObjectiveZipLib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibZip",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Objective-Zip-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;

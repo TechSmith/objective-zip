@@ -5,6 +5,7 @@
 #import "UnzipWithProgress.h"
 
 #import "FileInZipInfo.h"
+#import "LibZipReadStream.h"
 #import "ZipErrorCodes.h"
 #import "ZipException.h"
 #import "ZipFile.h"
@@ -80,23 +81,9 @@
    
    // find the stream and info for the file in the archive
    FileInZipInfo * fileInfo = nil;
-   ZipReadStream * readStream = nil;
+   LibZipReadStream * readStream = [_zipTool openReadStreamForName:fileName];
    
-   [_zipTool goToFirstFileInZip];
-   
-   do
-   {
-      FileInZipInfo * info = [_zipTool getCurrentFileInZipInfo];
-      if ([info.name compare:fileName] == NSOrderedSame)
-      {
-         readStream = [_zipTool readCurrentFileInZip];
-         fileInfo = info;
-         break;
-      }
-   } while ([_zipTool goToNextFileInZip]);
-   
-   
-   if (readStream == nil || fileInfo == nil)
+   if (readStream == nil  )
    {
       [self setErrorCode:ZipErrorCodes.OUZEC_CannotFindInfoForFileInArchive
             errorMessage:ZipErrorCodes.OUZEM_CannotFindInfoForFileInArchive
@@ -112,7 +99,6 @@
    _totalDestinationBytesWritten = 0;
    result = [self extractStream:readStream
                        toFolder:unzipToFolder
-                       withInfo:fileInfo
                  singleFileOnly:YES];
    
    [readStream finishedReading];
@@ -175,20 +161,18 @@
    
    if ([self insureAdequateDiskSpace:destinationFolder] == NO)  return;
    
-   [_zipTool goToFirstFileInZip];
-   
-   do
+   NSArray * filesInZip = [_zipTool listFileInZipInfos];
+   for ( int index = 0; index < filesInZip.count; ++index )
    {
-      FileInZipInfo * info = [_zipTool getCurrentFileInZipInfo];
+      FileInZipInfo * info = [filesInZip objectAtIndex:index];
       
       NSError * error  = nil;
       if ( !self.unzipFileDelegate || [self.unzipFileDelegate includeFileWithName:info.name error:&error] )
       {
-         ZipReadStream * readStream = [_zipTool readCurrentFileInZip];
+         LibZipReadStream * readStream = [_zipTool openReadStreamForIndex:index];
          
          [self extractStream:readStream
                     toFolder:_extractionURL
-                    withInfo:info
               singleFileOnly:NO];
          
          [readStream finishedReading];
@@ -210,8 +194,7 @@
          [self setCancelErrorAndCleanup];
          break;
       }
-      
-   } while ([_zipTool goToNextFileInZip]);
+   }
 }
 
 - (void) unzipToURL:(NSURL *)destinationFolder
@@ -340,15 +323,14 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
    [_zipDelegate updateProgress:progress];
 }
 
-- (BOOL) extractStream:(ZipReadStream *) readStream
+- (BOOL) extractStream:(LibZipReadStream *) readStream
               toFolder:(NSURL *) unzipToFolder
-              withInfo:(FileInZipInfo *) info
         singleFileOnly:(BOOL) singleFileOnly
 {
    BOOL result = NO;
    
    
-   NSURL * fullURL = [unzipToFolder URLByAppendingPathComponent:info.name];
+   NSURL * fullURL = [unzipToFolder URLByAppendingPathComponent:readStream.name];
    
    if ([_zipDelegate respondsToSelector:@selector(updateCurrentFile:)])
       [_zipDelegate  updateCurrentFile:fullURL];
@@ -356,7 +338,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
    // let the delegate modify the file name.  We do this in all cases, because the delegate may have its own ideas aboutwhat a collision is
    if ( self.unzipFileDelegate )
    {
-      fullURL = [unzipToFolder URLByAppendingPathComponent:[self.unzipFileDelegate modifiedNameForFileName:info.name]];
+      fullURL = [unzipToFolder URLByAppendingPathComponent:[self.unzipFileDelegate modifiedNameForFileName:readStream.name]];
    }
 
    // create an empty file - don't overwrite an existing file
@@ -397,7 +379,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
    
    [handle seekToFileOffset:0];
    
-   if (info.length == 0)
+   if (readStream.length == 0)
    {
       // zipfile contains a file with 0 byte length
       [handle closeFile];
@@ -409,7 +391,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
    
    [self updateProgress:totalBytesWritten
              forFileURL:fullURL
-           withFileInfo:info
+           withFileInfo:nil
          singleFileOnly:singleFileOnly];
    
    @try
@@ -418,8 +400,8 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
       {
          if (self.cancelOperation) break;
          
-         if (bytesToRead > (info.length - totalBytesWritten))
-            bytesToRead = info.length - totalBytesWritten;
+         if (bytesToRead > (readStream.length - totalBytesWritten))
+            bytesToRead = readStream.length - totalBytesWritten;
          
          NSData * data = [readStream readDataOfLength:bytesToRead];
          [handle writeData:data];
@@ -428,10 +410,10 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
          
          [self updateProgress:totalBytesWritten
                    forFileURL:fullURL
-                 withFileInfo:info
+                 withFileInfo:nil
                singleFileOnly:singleFileOnly];
          
-      } while (totalBytesWritten < info.length);
+      } while (totalBytesWritten < readStream.length);
       
       result = YES;
    }

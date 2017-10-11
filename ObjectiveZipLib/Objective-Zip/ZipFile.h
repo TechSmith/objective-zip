@@ -36,6 +36,7 @@
 #include "zip.h"
 #include "unzip.h"
 
+#include <libzip/zip.h>
 
 typedef enum {
 	ZipFileModeUnzip,
@@ -53,6 +54,7 @@ typedef enum {
 @class ZipReadStream;
 @class ZipWriteStream;
 @class FileInZipInfo;
+@class LibZipReadStream;
 
 @interface ZipFile : NSObject {
 	NSString *_fileName;
@@ -60,7 +62,8 @@ typedef enum {
 
 @private
 	zipFile _zipFile;
-	unzFile _unzFile;
+   
+   zip_t * _libZipFile;
 }
 
 - (id) initWithFileName:(NSString *)fileName mode:(ZipFileMode)mode;
@@ -72,14 +75,15 @@ typedef enum {
 - (NSUInteger) numFilesInZip;
 - (NSArray *) listFileInZipInfos;
 
-- (void) goToFirstFileInZip;
-- (BOOL) goToNextFileInZip;
 - (BOOL) locateFileInZip:(NSString *)fileNameInZip;
 
 - (FileInZipInfo *) getCurrentFileInZipInfo;
 
 - (ZipReadStream *) readCurrentFileInZip;
 - (ZipReadStream *) readCurrentFileInZipWithPassword:(NSString *)password;
+
+- (LibZipReadStream *) openReadStreamForName:(NSString *) filename;
+- (LibZipReadStream *) openReadStreamForIndex:(int) index;
 
 - (void) close;
 

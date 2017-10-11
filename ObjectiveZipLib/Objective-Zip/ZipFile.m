@@ -34,11 +34,13 @@
 #import "ZipFile.h"
 
 #import "FileInZipInfo.h"
+#import "LibZipReadStream.h"
 #import "ZipErrorCodes.h"
 #import "ZipException.h"
 #import "ZipReadStream.h"
 #import "ZipWriteStream.h"
 
+#include <libzip/zip.h>
 
 #define FILE_IN_ZIP_MAX_NAME_LENGTH (4096)
 
@@ -47,14 +49,15 @@
 
 
 - (id) initWithFileName:(NSString *)fileName mode:(ZipFileMode)mode {
+   int libzipError;
 	if ((self= [super init])) {
 		_fileName= fileName;
 		_mode= mode;
 		
 		switch (mode) {
 			case ZipFileModeUnzip:
-				_unzFile= unzOpen64([_fileName cStringUsingEncoding:NSUTF8StringEncoding]);
-				if (_unzFile == NULL) {
+				_libZipFile= zip_open([_fileName cStringUsingEncoding:NSUTF8StringEncoding], ZIP_RDONLY, &libzipError);
+				if (_libZipFile == NULL) {
 					NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OZCEM_CannotOpenZipFile,
                                   _fileName];
 					@throw [[ZipException alloc] initWithReason:reason];
@@ -207,67 +210,53 @@
 		@throw [[ZipException alloc] initWithReason:reason];
 	}
 	
-	unz_global_info gi;
-	int err= unzGetGlobalInfo(_unzFile, &gi);
-	if (err != UNZ_OK) {
-		NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OUZEM_CannotGetGlobalInfo,
-                         _fileName];
-		@throw [[ZipException alloc] initWithError:err reason:reason];
-	}
-	
-	return gi.number_entry;
+   return zip_get_num_files(_libZipFile);
 }
 
 - (NSArray *) listFileInZipInfos {
 	int num= (uInt)[self numFilesInZip];
 	if (num < 1)
-		return [[NSArray alloc] init];
+      return @[];
 	
 	NSMutableArray *files= [[NSMutableArray alloc] initWithCapacity:num];
 
-	[self goToFirstFileInZip];
-	for (int i= 0; i < num; i++) {
-		FileInZipInfo *info= [self getCurrentFileInZipInfo];
-		[files addObject:info];
+   for ( int index = 0; index < num; ++index )
+   {
+      zip_stat_t stats;
+      zip_stat_index(_libZipFile, index, 0, &stats);
+      
+      ZipCompressionLevel level= ZipCompressionLevelNone;
+      if (stats.comp_method != 0) {
+         switch ((stats.comp_method & 0x6) / 2) {
+            case 0:
+               level= ZipCompressionLevelDefault;
+               break;
+               
+            case 1:
+               level= ZipCompressionLevelBest;
+               break;
+               
+            default:
+               level= ZipCompressionLevelFastest;
+               break;
+         }
+      }
 
-		if ((i +1) < num)
-			[self goToNextFileInZip];
-	}
+      BOOL crypted= NO;
+
+      FileInZipInfo *info= [[FileInZipInfo alloc] initWithName:[NSString stringWithUTF8String:stats.name]
+                                                        length:stats.size
+                                                         level:level
+                                                       crypted:crypted
+                                                          size:stats.comp_size
+                                                          date:[NSDate date]
+                                                         crc32:stats.crc];
+
+      [files addObject:info];
+
+   }
 
 	return files;
-}
-
-- (void) goToFirstFileInZip {
-	if (_mode != ZipFileModeUnzip) {
-		NSString *reason= ZipErrorCodes.OZEM_OperationNotPermitted;
-		@throw [[ZipException alloc] initWithReason:reason];
-	}
-	
-	int err= unzGoToFirstFile(_unzFile);
-	if (err != UNZ_OK) {
-		NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OUZEM_CannotGoToFirstFileInArchive,
-                         _fileName];
-		@throw [[ZipException alloc] initWithError:err reason:reason];
-	}
-}
-
-- (BOOL) goToNextFileInZip {
-	if (_mode != ZipFileModeUnzip) {
-		NSString *reason= ZipErrorCodes.OZEM_OperationNotPermitted;
-		@throw [[ZipException alloc] initWithReason:reason];
-	}
-	
-	int err= unzGoToNextFile(_unzFile);
-	if (err == UNZ_END_OF_LIST_OF_FILE)
-		return NO;
-
-	if (err != UNZ_OK) {
-		NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OUZEM_CannotGoToNextFileInArchive,
-                         _fileName];
-		@throw [[ZipException alloc] initWithError:err reason:reason];
-	}
-	
-	return YES;
 }
 
 - (BOOL) locateFileInZip:(NSString *)fileNameInZip {
@@ -276,134 +265,83 @@
 		@throw [[ZipException alloc] initWithReason:reason];
 	}
 	
-	int err= unzLocateFile(_unzFile, [fileNameInZip cStringUsingEncoding:NSUTF8StringEncoding], NULL);
-	if (err == UNZ_END_OF_LIST_OF_FILE)
+   zip_error_clear(_libZipFile);
+	zip_int64_t index = zip_name_locate(_libZipFile, [fileNameInZip cStringUsingEncoding:NSUTF8StringEncoding], 0);
+	if (index == -1 )
 		return NO;
 
-	if (err != UNZ_OK) {
+   zip_error_t * error = zip_get_error(_libZipFile);
+	if (  error != nil )
+   {
 		NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OUZEM_CannotGoToNextFileInArchive,
                          _fileName];
-		@throw [[ZipException alloc] initWithError:err reason:reason];
+		@throw [[ZipException alloc] initWithError:zip_error_code_zip(error) reason:reason];
 	}
 	
 	return YES;
 }
 
-- (FileInZipInfo *) getCurrentFileInZipInfo {
-	if (_mode != ZipFileModeUnzip) {
-		NSString *reason= ZipErrorCodes.OZEM_OperationNotPermitted;
-		@throw [[ZipException alloc] initWithReason:reason];
-	}
-
-	char filename_inzip[FILE_IN_ZIP_MAX_NAME_LENGTH];
-	unz_file_info file_info;
-	
-	int err= unzGetCurrentFileInfo(_unzFile, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
-	if (err != UNZ_OK) {
-		NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OUZEM_CannotGetCurrentFileInfoInArchive,
-                         _fileName];
-		@throw [[ZipException alloc] initWithError:err reason:reason];
-	}
-	
-	NSString *name= [NSString stringWithCString:filename_inzip encoding:NSUTF8StringEncoding];
-	
-	ZipCompressionLevel level= ZipCompressionLevelNone;
-	if (file_info.compression_method != 0) {
-		switch ((file_info.flag & 0x6) / 2) {
-			case 0:
-				level= ZipCompressionLevelDefault;
-				break;
-				
-			case 1:
-				level= ZipCompressionLevelBest;
-				break;
-				
-			default:
-				level= ZipCompressionLevelFastest;
-				break;
-		}
-	}
-	
-	BOOL crypted= ((file_info.flag & 1) != 0);
-	
-	NSDateComponents *components= [[NSDateComponents alloc] init];
-	[components setDay:file_info.tmu_date.tm_mday];
-	[components setMonth:file_info.tmu_date.tm_mon +1];
-	[components setYear:file_info.tmu_date.tm_year];
-	[components setHour:file_info.tmu_date.tm_hour];
-	[components setMinute:file_info.tmu_date.tm_min];
-	[components setSecond:file_info.tmu_date.tm_sec];
-	NSCalendar *calendar= [NSCalendar currentCalendar];
-	NSDate *date= [calendar dateFromComponents:components];
-	
-	return [[FileInZipInfo alloc] initWithName:name length:file_info.uncompressed_size
-                                        level:level
-                                      crypted:crypted size:file_info.compressed_size
-                                         date:date
-                                        crc32:file_info.crc];
-}
-
-- (ZipReadStream *) readCurrentFileInZip {
-	if (_mode != ZipFileModeUnzip) {
-		NSString *reason= ZipErrorCodes.OZEM_OperationNotPermitted;
-		@throw [[ZipException alloc] initWithReason:reason];
-	}
-
-	char filename_inzip[FILE_IN_ZIP_MAX_NAME_LENGTH];
-	unz_file_info file_info;
-	
-	int err= unzGetCurrentFileInfo(_unzFile, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
-	if (err != UNZ_OK) {
-		NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OUZEM_CannotGetCurrentFileInfoInArchive,
-                         _fileName];
-		@throw [[ZipException alloc] initWithError:err reason:reason];
-	}
-	
-	NSString *fileNameInZip= [NSString stringWithCString:filename_inzip encoding:NSUTF8StringEncoding];
-	
-	err= unzOpenCurrentFilePassword(_unzFile, NULL);
-	if (err != UNZ_OK) {
-		NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OUZEM_CannotOpenCurrentFileInArchive,
-                         _fileName];
-		@throw [[ZipException alloc] initWithError:err reason:reason];
-	}
-	
-	return [[ZipReadStream alloc] initWithUnzFileStruct:_unzFile fileNameInZip:fileNameInZip];
-}
-
-- (ZipReadStream *) readCurrentFileInZipWithPassword:(NSString *)password {
-	if (_mode != ZipFileModeUnzip) {
-		NSString *reason= ZipErrorCodes.OZEM_OperationNotPermitted;
-		@throw [[ZipException alloc] initWithReason:reason];
-	}
-	
-	char filename_inzip[FILE_IN_ZIP_MAX_NAME_LENGTH];
-	unz_file_info file_info;
-	
-	int err= unzGetCurrentFileInfo(_unzFile, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
-	if (err != UNZ_OK) {
-		NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OUZEM_CannotGetCurrentFileInfoInArchive,
-                         _fileName];
-		@throw [[ZipException alloc] initWithError:err reason:reason];
-	}
-	
-	NSString *fileNameInZip= [NSString stringWithCString:filename_inzip encoding:NSUTF8StringEncoding];
-
-	err= unzOpenCurrentFilePassword(_unzFile, [password cStringUsingEncoding:NSUTF8StringEncoding]);
-	if (err != UNZ_OK) {
-		NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OUZEM_CannotOpenCurrentFileInArchive,
-                         _fileName];
-		@throw [[ZipException alloc] initWithError:err reason:reason];
-	}
-	
-	return [[ZipReadStream alloc] initWithUnzFileStruct:_unzFile fileNameInZip:fileNameInZip];
-}
+//- (FileInZipInfo *) getCurrentFileInZipInfo {
+//	if (_mode != ZipFileModeUnzip) {
+//		NSString *reason= ZipErrorCodes.OZEM_OperationNotPermitted;
+//		@throw [[ZipException alloc] initWithReason:reason];
+//	}
+//
+//	char filename_inzip[FILE_IN_ZIP_MAX_NAME_LENGTH];
+//	unz_file_info file_info;
+//	
+//	int err= unzGetCurrentFileInfo(_unzFile, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
+//	if (err != UNZ_OK) {
+//		NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OUZEM_CannotGetCurrentFileInfoInArchive,
+//                         _fileName];
+//		@throw [[ZipException alloc] initWithError:err reason:reason];
+//	}
+//	
+//	NSString *name= [NSString stringWithCString:filename_inzip encoding:NSUTF8StringEncoding];
+//	
+//	ZipCompressionLevel level= ZipCompressionLevelNone;
+//	if (file_info.compression_method != 0) {
+//		switch ((file_info.flag & 0x6) / 2) {
+//			case 0:
+//				level= ZipCompressionLevelDefault;
+//				break;
+//				
+//			case 1:
+//				level= ZipCompressionLevelBest;
+//				break;
+//				
+//			default:
+//				level= ZipCompressionLevelFastest;
+//				break;
+//		}
+//	}
+//	
+//	BOOL crypted= ((file_info.flag & 1) != 0);
+//	
+//	NSDateComponents *components= [[NSDateComponents alloc] init];
+//	[components setDay:file_info.tmu_date.tm_mday];
+//	[components setMonth:file_info.tmu_date.tm_mon +1];
+//	[components setYear:file_info.tmu_date.tm_year];
+//	[components setHour:file_info.tmu_date.tm_hour];
+//	[components setMinute:file_info.tmu_date.tm_min];
+//	[components setSecond:file_info.tmu_date.tm_sec];
+//	NSCalendar *calendar= [NSCalendar currentCalendar];
+//	NSDate *date= [calendar dateFromComponents:components];
+//	
+//	return [[FileInZipInfo alloc] initWithName:name length:file_info.uncompressed_size
+//                                        level:level
+//                                      crypted:crypted size:file_info.compressed_size
+//                                         date:date
+//                                        crc32:file_info.crc];
+//}
 
 - (void) close {
 	switch (_mode) {
 		case ZipFileModeUnzip: {
-			int err= unzClose(_unzFile);
-			if (err != UNZ_OK) {
+
+         int err = zip_close(_libZipFile);
+			if (err != UNZ_OK)
+         {
 				NSString *reason= [NSString stringWithFormat:ZipErrorCodes.OZCEM_CannotCloseZipFile,
                                _fileName];
 				@throw [[ZipException alloc] initWithError:err reason:reason];
@@ -439,5 +377,15 @@
 	}
 }
 
+- (LibZipReadStream *) openReadStreamForName:(NSString *) filename
+{
+   return [[LibZipReadStream alloc] initWithZipFile:_libZipFile
+                                            internalFileName:filename];
+}
 
+- (LibZipReadStream *) openReadStreamForIndex:(int) index;
+{
+   return [[LibZipReadStream alloc] initWithZipFile:_libZipFile
+                                   index:index];
+}
 @end
