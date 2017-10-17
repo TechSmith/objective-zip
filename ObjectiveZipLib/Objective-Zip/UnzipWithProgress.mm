@@ -367,6 +367,13 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
    
    if ( ![fileManager fileExistsAtPath:parentURL.path] )
    {
+      NSURL * newFolder = parentURL;
+      do
+      {
+         [self addToFilesCreated:newFolder];
+         newFolder = [newFolder URLByDeletingLastPathComponent];
+      }
+      while ( ![fileManager fileExistsAtPath:newFolder.path]);
       [fileManager createDirectoryAtURL:parentURL withIntermediateDirectories:YES attributes:nil error:&error];
    }
    NSData * emptyData = [NSData new];
