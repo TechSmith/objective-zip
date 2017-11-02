@@ -34,6 +34,7 @@
 #import "ZipFile.h"
 
 #import "FileInZipInfo.h"
+#import "NSDate+DOSDate.h"
 #import "ZipErrorCodes.h"
 #import "ZipException.h"
 #import "ZipReadStream.h"
@@ -96,22 +97,10 @@
 		@throw [[ZipException alloc] initWithReason:reason];
 	}
 	
-	NSDate *now= [NSDate date];
-	NSCalendar *calendar= [NSCalendar currentCalendar];
-	NSDateComponents *date= [calendar components:(NSCalendarUnitSecond | NSCalendarUnitMinute |
-                                                 NSCalendarUnitHour | NSCalendarUnitDay |
-                                                 NSCalendarUnitMonth | NSCalendarUnitYear)
-                                       fromDate:now];
 	zip_fileinfo zi;
-	zi.tmz_date.tm_sec= (uInt)[date second];
-	zi.tmz_date.tm_min= (uInt)[date minute];
-	zi.tmz_date.tm_hour= (uInt)[date hour];
-	zi.tmz_date.tm_mday= (uInt)[date day];
-	zi.tmz_date.tm_mon= (uInt)[date month] -1;
-	zi.tmz_date.tm_year= (uInt)[date year];
 	zi.internal_fa= 0;
 	zi.external_fa= 0;
-	zi.dosDate= 0;
+   zi.dos_date=[[NSDate date] dosDate];
 	
    int err= zipOpenNewFileInZip3_64(_zipFile,
                                     [fileNameInZip cStringUsingEncoding:NSUTF8StringEncoding],
@@ -136,18 +125,10 @@
 		@throw [[ZipException alloc] initWithReason:reason];
 	}
 	
-	NSCalendar *calendar= [NSCalendar currentCalendar];
-	NSDateComponents *date= [calendar components:(NSCalendarUnitSecond | NSCalendarUnitMinute | NSCalendarUnitHour | NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear) fromDate:fileDate];
 	zip_fileinfo zi;
-	zi.tmz_date.tm_sec= (uInt)[date second];
-	zi.tmz_date.tm_min= (uInt)[date minute];
-	zi.tmz_date.tm_hour= (uInt)[date hour];
-	zi.tmz_date.tm_mday= (uInt)[date day];
-	zi.tmz_date.tm_mon= (uInt)[date month] -1;
-	zi.tmz_date.tm_year= (uInt)[date year];
 	zi.internal_fa= 0;
 	zi.external_fa= 0;
-	zi.dosDate= 0;
+	zi.dos_date= [fileDate dosDate];
 	
    int err= zipOpenNewFileInZip3_64(_zipFile,
                                     [fileNameInZip cStringUsingEncoding:NSUTF8StringEncoding],
@@ -172,18 +153,10 @@
 		@throw [[ZipException alloc] initWithReason:reason];
 	}
 	
-	NSCalendar *calendar= [NSCalendar currentCalendar];
-	NSDateComponents *date= [calendar components:(NSCalendarUnitSecond | NSCalendarUnitMinute | NSCalendarUnitHour | NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear) fromDate:fileDate];
 	zip_fileinfo zi;
-	zi.tmz_date.tm_sec= (uInt)[date second];
-	zi.tmz_date.tm_min= (uInt)[date minute];
-	zi.tmz_date.tm_hour= (uInt)[date hour];
-	zi.tmz_date.tm_mday= (uInt)[date day];
-	zi.tmz_date.tm_mon= (uInt)[date month] -1;
-	zi.tmz_date.tm_year= (uInt)[date year];
 	zi.internal_fa= 0;
 	zi.external_fa= 0;
-	zi.dosDate= 0;
+	zi.dos_date= [fileDate dosDate];
 	
    int err= zipOpenNewFileInZip3_64(_zipFile,
                                     [fileNameInZip cStringUsingEncoding:NSUTF8StringEncoding],
@@ -326,15 +299,7 @@
 	
 	BOOL crypted= ((file_info.flag & 1) != 0);
 	
-	NSDateComponents *components= [[NSDateComponents alloc] init];
-	[components setDay:file_info.tmu_date.tm_mday];
-	[components setMonth:file_info.tmu_date.tm_mon +1];
-	[components setYear:file_info.tmu_date.tm_year];
-	[components setHour:file_info.tmu_date.tm_hour];
-	[components setMinute:file_info.tmu_date.tm_min];
-	[components setSecond:file_info.tmu_date.tm_sec];
-	NSCalendar *calendar= [NSCalendar currentCalendar];
-	NSDate *date= [calendar dateFromComponents:components];
+	NSDate *date= [NSDate fromDosDate:file_info.dos_date];
 	
 	return [[FileInZipInfo alloc] initWithName:name length:file_info.uncompressed_size
                                         level:level

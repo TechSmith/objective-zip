@@ -76,6 +76,16 @@
 		035110021B21CF8D007EA388 /* ZipProgressBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03510FFE1B21CF8D007EA388 /* ZipProgressBase.mm */; };
 		03E2DDC01B384E7B00DB2E61 /* ZipErrorCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 03E2DDBF1B384E7B00DB2E61 /* ZipErrorCodes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03E2DDC11B384E7B00DB2E61 /* ZipErrorCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 03E2DDBF1B384E7B00DB2E61 /* ZipErrorCodes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5A3F05731FAB626700B859A8 /* NSDate+DOSDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A3F05711FAB626700B859A8 /* NSDate+DOSDate.h */; };
+		5A3F05741FAB626700B859A8 /* NSDate+DOSDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A3F05711FAB626700B859A8 /* NSDate+DOSDate.h */; };
+		5A3F05751FAB626700B859A8 /* NSDate+DOSDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A3F05711FAB626700B859A8 /* NSDate+DOSDate.h */; };
+		5A3F05761FAB626700B859A8 /* NSDate+DOSDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A3F05711FAB626700B859A8 /* NSDate+DOSDate.h */; };
+		5A3F05771FAB626700B859A8 /* NSDate+DOSDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A3F05711FAB626700B859A8 /* NSDate+DOSDate.h */; };
+		5A3F05781FAB626700B859A8 /* NSDate+DOSDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F05721FAB626700B859A8 /* NSDate+DOSDate.m */; };
+		5A3F05791FAB626700B859A8 /* NSDate+DOSDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F05721FAB626700B859A8 /* NSDate+DOSDate.m */; };
+		5A3F057A1FAB626700B859A8 /* NSDate+DOSDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F05721FAB626700B859A8 /* NSDate+DOSDate.m */; };
+		5A3F057B1FAB626700B859A8 /* NSDate+DOSDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F05721FAB626700B859A8 /* NSDate+DOSDate.m */; };
+		5A3F057C1FAB626700B859A8 /* NSDate+DOSDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F05721FAB626700B859A8 /* NSDate+DOSDate.m */; };
 		5A4657411F79920A0052E3B0 /* UnzipFileDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A4657401F79907E0052E3B0 /* UnzipFileDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5A4657421F7992280052E3B0 /* UnzipFileDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A4657401F79907E0052E3B0 /* UnzipFileDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5A4657431F7992290052E3B0 /* UnzipFileDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A4657401F79907E0052E3B0 /* UnzipFileDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -164,6 +174,8 @@
 		03510FFD1B21CF8D007EA388 /* ZipProgressBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipProgressBase.h; sourceTree = "<group>"; };
 		03510FFE1B21CF8D007EA388 /* ZipProgressBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipProgressBase.mm; sourceTree = "<group>"; };
 		03E2DDBF1B384E7B00DB2E61 /* ZipErrorCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipErrorCodes.h; sourceTree = "<group>"; };
+		5A3F05711FAB626700B859A8 /* NSDate+DOSDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DOSDate.h"; sourceTree = "<group>"; };
+		5A3F05721FAB626700B859A8 /* NSDate+DOSDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DOSDate.m"; sourceTree = "<group>"; };
 		5A4657401F79907E0052E3B0 /* UnzipFileDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnzipFileDelegate.h; sourceTree = "<group>"; };
 		EAA4E3BB14FD56B70025B561 /* libObjective-Zip.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libObjective-Zip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA4E3BE14FD56B70025B561 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -297,6 +309,8 @@
 		EAA4E3D214FD58920025B561 /* Objective-Zip */ = {
 			isa = PBXGroup;
 			children = (
+				5A3F05711FAB626700B859A8 /* NSDate+DOSDate.h */,
+				5A3F05721FAB626700B859A8 /* NSDate+DOSDate.m */,
 				EAA4E3DB14FD58920025B561 /* FileInZipInfo.h */,
 				EAA4E3DC14FD58920025B561 /* FileInZipInfo.m */,
 				03510FE11B1CB578007EA388 /* ProgressDelegate.h */,
@@ -342,6 +356,7 @@
 				033584A61C1B398300F9F7F1 /* unzip.h in Headers */,
 				033584A51C1B397800F9F7F1 /* ioapi.h in Headers */,
 				0335849E1C1B387800F9F7F1 /* ZipException.h in Headers */,
+				5A3F05761FAB626700B859A8 /* NSDate+DOSDate.h in Headers */,
 				0335849A1C1B37C500F9F7F1 /* FileInZipInfo.h in Headers */,
 				033584A21C1B38CD00F9F7F1 /* ZipWithProgress.h in Headers */,
 			);
@@ -365,6 +380,7 @@
 				033585141C1B602400F9F7F1 /* unzip.h in Headers */,
 				033585151C1B602400F9F7F1 /* ioapi.h in Headers */,
 				033585161C1B602400F9F7F1 /* ZipException.h in Headers */,
+				5A3F05771FAB626700B859A8 /* NSDate+DOSDate.h in Headers */,
 				033585171C1B602400F9F7F1 /* FileInZipInfo.h in Headers */,
 				033585181C1B602400F9F7F1 /* ZipWithProgress.h in Headers */,
 			);
@@ -378,6 +394,7 @@
 				EAA4E3EA14FD58920025B561 /* unzip.h in Headers */,
 				03510FDD1B1CB4CE007EA388 /* UnzipWithProgress.h in Headers */,
 				5A4657411F79920A0052E3B0 /* UnzipFileDelegate.h in Headers */,
+				5A3F05731FAB626700B859A8 /* NSDate+DOSDate.h in Headers */,
 				EDBCB5E41B1E5E4300C41248 /* crypt.h in Headers */,
 				03510FFF1B21CF8D007EA388 /* ZipProgressBase.h in Headers */,
 				03510FE21B1CB578007EA388 /* ProgressDelegate.h in Headers */,
@@ -400,6 +417,7 @@
 				ED2982261BD6C4430034E973 /* ZipException.h in Headers */,
 				ED2982271BD6C4430034E973 /* ZipFile.h in Headers */,
 				5A4657431F7992290052E3B0 /* UnzipFileDelegate.h in Headers */,
+				5A3F05751FAB626700B859A8 /* NSDate+DOSDate.h in Headers */,
 				ED2982281BD6C4430034E973 /* crypt.h in Headers */,
 				ED2982291BD6C4430034E973 /* ZipProgressBase.h in Headers */,
 				ED29822A1BD6C4430034E973 /* UnzipWithProgress.h in Headers */,
@@ -422,6 +440,7 @@
 				ED4430BF1B191090007A3256 /* ZipException.h in Headers */,
 				ED4430C01B191090007A3256 /* ZipFile.h in Headers */,
 				5A4657421F7992280052E3B0 /* UnzipFileDelegate.h in Headers */,
+				5A3F05741FAB626700B859A8 /* NSDate+DOSDate.h in Headers */,
 				EDBCB5E51B1E5E4300C41248 /* crypt.h in Headers */,
 				035110001B21CF8D007EA388 /* ZipProgressBase.h in Headers */,
 				03510FDE1B1CB4CE007EA388 /* UnzipWithProgress.h in Headers */,
@@ -585,6 +604,7 @@
 			files = (
 				0335848F1C1B371700F9F7F1 /* ioapi.c in Sources */,
 				033584901C1B371700F9F7F1 /* unzip.c in Sources */,
+				5A3F057B1FAB626700B859A8 /* NSDate+DOSDate.m in Sources */,
 				033584911C1B371700F9F7F1 /* zip.c in Sources */,
 				033584921C1B371700F9F7F1 /* FileInZipInfo.m in Sources */,
 				033584931C1B371700F9F7F1 /* UnzipWithProgress.mm in Sources */,
@@ -604,6 +624,7 @@
 			files = (
 				033584FC1C1B602400F9F7F1 /* ioapi.c in Sources */,
 				033584FD1C1B602400F9F7F1 /* unzip.c in Sources */,
+				5A3F057C1FAB626700B859A8 /* NSDate+DOSDate.m in Sources */,
 				033584FE1C1B602400F9F7F1 /* zip.c in Sources */,
 				033584FF1C1B602400F9F7F1 /* FileInZipInfo.m in Sources */,
 				033585001C1B602400F9F7F1 /* UnzipWithProgress.mm in Sources */,
@@ -623,6 +644,7 @@
 			files = (
 				EAA4E3E514FD58920025B561 /* ioapi.c in Sources */,
 				EAA4E3E914FD58920025B561 /* unzip.c in Sources */,
+				5A3F05781FAB626700B859A8 /* NSDate+DOSDate.m in Sources */,
 				EAA4E3EB14FD58920025B561 /* zip.c in Sources */,
 				ED4430AA1B18CFDF007A3256 /* ZipWithProgress.mm in Sources */,
 				EAA4E3EE14FD58920025B561 /* FileInZipInfo.m in Sources */,
@@ -642,6 +664,7 @@
 			files = (
 				ED2982171BD6C4430034E973 /* ioapi.c in Sources */,
 				ED2982181BD6C4430034E973 /* unzip.c in Sources */,
+				5A3F057A1FAB626700B859A8 /* NSDate+DOSDate.m in Sources */,
 				ED2982191BD6C4430034E973 /* zip.c in Sources */,
 				ED29821A1BD6C4430034E973 /* ZipWithProgress.mm in Sources */,
 				ED29821B1BD6C4430034E973 /* FileInZipInfo.m in Sources */,
@@ -661,6 +684,7 @@
 			files = (
 				ED4430AD1B191090007A3256 /* ioapi.c in Sources */,
 				ED4430AF1B191090007A3256 /* unzip.c in Sources */,
+				5A3F05791FAB626700B859A8 /* NSDate+DOSDate.m in Sources */,
 				ED4430B01B191090007A3256 /* zip.c in Sources */,
 				ED4430B11B191090007A3256 /* ZipWithProgress.mm in Sources */,
 				ED4430B21B191090007A3256 /* FileInZipInfo.m in Sources */,
@@ -994,6 +1018,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NOUNCRYPT=1",
+					"NOCRYPT=1",
+				);
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1030,8 +1058,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
+					"NOUNCRYPT=1",
+					"NOCRYPT=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
@@ -1052,7 +1080,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_PREPROCESSOR_DEFINITIONS = "NDEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NOUNCRYPT=1",
+					"NOCRYPT=1",
+				);
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

@@ -412,7 +412,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
    }
    
    unsigned long long totalBytesWritten = 0;
-   unsigned long  bytesToRead = 1024 * 64; // read/write 64k at a time
+   unsigned long  bytesToRead = 1024 * 63; // read/write 63k at a time.  64K chunks are two big for this version of MiniZip
    
    [self updateProgress:totalBytesWritten
              forFileURL:fullURL
