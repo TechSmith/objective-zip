@@ -3,14 +3,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ProgressDelegate.h"
+#import "OZProgressDelegate.h"
 
 #include <map>
 #include <string>
 
 
 // forward declarations
-@class ZipFile;
+@class OZZipFile;
 
 
 //
@@ -21,9 +21,9 @@
 @protected
    NSURL *              _zipFileURL;
    NSError *            _zipFileError;
-   ZipFile *            _zipTool;
+   OZZipFile *          _zipTool;
    
-   __weak id<ProgressDelegate> _zipDelegate;
+   __weak id<OZProgressDelegate> _zipDelegate;
    
    unsigned long long   _totalFileSize;
    unsigned long long   _totalDestinationBytesWritten;
@@ -32,7 +32,7 @@
 // ideally, protected methods
 - (id) initWithZipFile:(NSURL *)zipFileURL
                forMode:(unsigned) mode
-          withDelegate:(id<ProgressDelegate>)delegate;
+          withDelegate:(id<OZProgressDelegate>)delegate;
 
 - (BOOL) createZipToolIfNeeded;
 - (void) performZipToolCleanup;
@@ -54,7 +54,7 @@
                       andFreeSpaceBuffer:(unsigned long long) bufferSpaceRemaining;
 
 // public methods
-- (void) setProgressDelegate:(id<ProgressDelegate>)delegate;
+- (void) setProgressDelegate:(id<OZProgressDelegate>)delegate;
 
 @property (assign, atomic) BOOL cancelOperation;
 

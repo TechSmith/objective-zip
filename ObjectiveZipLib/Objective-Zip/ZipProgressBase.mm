@@ -4,9 +4,9 @@
 
 #import "ZipProgressBase.h"
 
-#import "ZipException.h"
-#import "ZipErrorCodes.h"
-#import "ZipFile.h"
+#import "OZZipException.h"
+#import "OZZipErrorCodes.h"
+#import "OZZipFile+Standard.h"
 
 
 //
@@ -15,7 +15,7 @@
 @interface ZipProgressBase()
 {
    NSMutableArray *  _filesCreated;
-   ZipFileMode       _zipFileMode;
+   OZZipFileMode       _zipFileMode;
 }
 
 @end
@@ -28,14 +28,14 @@
 
 - (id) initWithZipFile:(NSURL *)zipFileURL
                forMode:(unsigned) mode
-          withDelegate:(id<ProgressDelegate>)delegate;
+          withDelegate:(id<OZProgressDelegate>)delegate;
 {
    if (self = [self init])
    {
       [self setProgressDelegate:delegate];
       
       _zipFileURL = [zipFileURL copy];
-      _zipFileMode = (ZipFileMode)mode;
+      _zipFileMode = (OZZipFileMode)mode;
       
       if (![self createZipToolIfNeeded]) return nil;
    }
@@ -59,7 +59,7 @@
    }
 }
 
-- (void) setProgressDelegate:(id<ProgressDelegate>)delegate
+- (void) setProgressDelegate:(id<OZProgressDelegate>)delegate
 {
    _zipDelegate = delegate;
 }
@@ -73,9 +73,9 @@
    {
       @try
       {
-         _zipTool = [[ZipFile alloc] initWithFileName:[_zipFileURL path] mode:_zipFileMode];
+         _zipTool = [[OZZipFile alloc] initWithFileName:[_zipFileURL path] mode:_zipFileMode];
       }
-      @catch (ZipException * exception)
+      @catch (OZZipException * exception)
       {
          [self setErrorCode:exception.error errorMessage:exception.reason andNotify:YES];
          _zipTool = nil;   // something failed during initialization
@@ -90,7 +90,7 @@
    if (_zipTool)
    {
       // make sure we only ever call close once.  close can throw, leaving us in a weird state.
-      ZipFile * tempZipTool = _zipTool;
+      OZZipFile * tempZipTool = _zipTool;
       _zipTool = nil;
       [tempZipTool close];
    }
