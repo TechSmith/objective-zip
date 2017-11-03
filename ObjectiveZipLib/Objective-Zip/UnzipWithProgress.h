@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ProgressDelegate.h"
+#import "OZProgressDelegate.h"
 #import "UnzipFileDelegate.h"
 #import "ZipProgressBase.h"
 

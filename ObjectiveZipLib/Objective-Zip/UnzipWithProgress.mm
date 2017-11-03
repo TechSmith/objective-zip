@@ -4,11 +4,11 @@
 
 #import "UnzipWithProgress.h"
 
-#import "FileInZipInfo.h"
-#import "ZipErrorCodes.h"
-#import "ZipException.h"
-#import "ZipFile.h"
-#import "ZipReadStream.h"
+#import "OZFileInZipInfo.h"
+#import "OZZipErrorCodes.h"
+#import "OZZipException.h"
+#import "OZZipFile+Standard.h"
+#import "OZZipReadStream+Standard.h"
 
 #include <set>
 
@@ -33,9 +33,9 @@
 
 - (id) initWithZipFilePath:(NSURL *)zipFileURL
              requiredFiles:(NSArray *)requiredFiles
-               andDelegate:(id<ProgressDelegate>)delegate
+               andDelegate:(id<OZProgressDelegate>)delegate
 {
-   if (self = [super initWithZipFile:zipFileURL forMode:ZipFileModeUnzip withDelegate:delegate])
+   if (self = [super initWithZipFile:zipFileURL forMode:OZZipFileModeUnzip withDelegate:delegate])
    {
       _zipRequiredFiles = requiredFiles;
       _createNewFolder = YES;
@@ -51,7 +51,7 @@
    if (fileInfoList.count)
    {
       result = [NSMutableArray arrayWithCapacity:fileInfoList.count];
-      for (FileInZipInfo * info in fileInfoList)
+      for (OZFileInZipInfo * info in fileInfoList)
          if (info.name)
             [result addObject:info.name];
    }
@@ -79,14 +79,14 @@
    if (![self insureCanUnzipToLocation:unzipToFolder]) return result;
    
    // find the stream and info for the file in the archive
-   FileInZipInfo * fileInfo = nil;
-   ZipReadStream * readStream = nil;
+   OZFileInZipInfo * fileInfo = nil;
+   OZZipReadStream * readStream = nil;
    
    [_zipTool goToFirstFileInZip];
    
    do
    {
-      FileInZipInfo * info = [_zipTool getCurrentFileInZipInfo];
+      OZFileInZipInfo * info = [_zipTool getCurrentFileInZipInfo];
       if ([info.name compare:fileName] == NSOrderedSame)
       {
          readStream = [_zipTool readCurrentFileInZip];
@@ -179,12 +179,12 @@
    
    do
    {
-      FileInZipInfo * info = [_zipTool getCurrentFileInZipInfo];
+      OZFileInZipInfo * info = [_zipTool getCurrentFileInZipInfo];
       
       NSError * error  = nil;
       if ( !self.unzipFileDelegate || [self.unzipFileDelegate includeFileWithName:info.name error:&error] )
       {
-         ZipReadStream * readStream = [_zipTool readCurrentFileInZip];
+         OZZipReadStream * readStream = [_zipTool readCurrentFileInZip];
          
          [self extractStream:readStream
                     toFolder:_extractionURL
@@ -278,7 +278,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
 
    NSArray * fileInfoList = [_zipTool listFileInZipInfos];
    for (NSString * name in requredFiles)
-      for (FileInZipInfo * info in fileInfoList)
+      for (OZFileInZipInfo * info in fileInfoList)
          if ([name compare:info.name] != NSOrderedSame)
             return NO;
    
@@ -290,7 +290,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
    if (_totalFileSize) return _totalFileSize;
    
    NSArray * fileInfoList = [_zipTool listFileInZipInfos];
-   for (FileInZipInfo * info in fileInfoList)
+   for (OZFileInZipInfo * info in fileInfoList)
       _totalFileSize += info.length;
    
    return _totalFileSize;
@@ -319,7 +319,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
 
 - (void) updateProgress:(unsigned long long) bytesReadFromFile
              forFileURL:(NSURL *)fileUrl
-            withFileInfo:(FileInZipInfo*) info
+            withFileInfo:(OZFileInZipInfo*) info
          singleFileOnly:(BOOL) singleFileOnly
 {
    if (_zipDelegate == nil) return;
@@ -340,9 +340,9 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
    [_zipDelegate updateProgress:progress];
 }
 
-- (BOOL) extractStream:(ZipReadStream *) readStream
+- (BOOL) extractStream:(OZZipReadStream *) readStream
               toFolder:(NSURL *) unzipToFolder
-              withInfo:(FileInZipInfo *) info
+              withInfo:(OZFileInZipInfo *) info
         singleFileOnly:(BOOL) singleFileOnly
 {
    BOOL result = NO;
@@ -412,7 +412,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
    }
    
    unsigned long long totalBytesWritten = 0;
-   unsigned long  bytesToRead = 1024 * 64; // read/write 64k at a time
+   unsigned long  bytesToRead = 1024 * 63; // read/write 63k at a time.  64K blocks are too big.
    
    [self updateProgress:totalBytesWritten
              forFileURL:fullURL
@@ -427,8 +427,9 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
          
          if (bytesToRead > (info.length - totalBytesWritten))
             bytesToRead = info.length - totalBytesWritten;
-         
-         NSData * data = [readStream readDataOfLength:bytesToRead];
+         NSMutableData * data = [NSMutableData dataWithLength:bytesToRead];
+         NSUInteger bytesRead = [readStream readDataWithBuffer:data];
+         [data setLength:bytesRead];
          [handle writeData:data];
          totalBytesWritten += data.length;
          _totalDestinationBytesWritten += data.length;
@@ -442,7 +443,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
       
       result = YES;
    }
-   @catch (ZipException *ze)
+   @catch (OZZipException *ze)
    {
       NSString * reason = [ze reason];
       [self setErrorCode:ze.error errorMessage:reason andNotify:YES];

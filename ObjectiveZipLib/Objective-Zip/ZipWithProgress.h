@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ProgressDelegate.h"
+#import "OZProgressDelegate.h"
 #import "ZipProgressBase.h"
 
 #include <map>
@@ -23,7 +23,7 @@
 // delegate - ProgressDelegate protocol object to call with progress and errors
 - (id)   initWithZipFilePath:(NSURL *)zipFileURL
                      fileMap:(const std::map<std::string, std::string> &)filesToZip
-                 andDelegate:(id<ProgressDelegate>)delegate;
+                 andDelegate:(id<OZProgressDelegate>)delegate;
 
 - (BOOL) canZipFiles;
 - (void) createZipFileWithCompletionBlock:(void(^)(NSError * error))completion;

@@ -4,10 +4,10 @@
 
 #import "ZipWithProgress.h"
 
-#import "ZipErrorCodes.h"
-#import "ZipException.h"
-#import "ZipFile.h"
-#import "ZipWriteStream.h"
+#import "OZZipErrorCodes.h"
+#import "OZZipException+Internals.h"
+#import "OZZipFile+Standard.h"
+#import "OZZipWriteStream+Standard.h"
 
 #include <set>
 
@@ -30,9 +30,9 @@
 
 - (id) initWithZipFilePath:(NSURL *)zipFileURL
                    fileMap:(const std::map<std::string, std::string> &)filesToZip
-               andDelegate:(id<ProgressDelegate>)delegate
+               andDelegate:(id<OZProgressDelegate>)delegate
 {
-   if (self = [super initWithZipFile:zipFileURL forMode:ZipFileModeCreate withDelegate:delegate])
+   if (self = [super initWithZipFile:zipFileURL forMode:OZZipFileModeCreate withDelegate:delegate])
    {
       _zipFileMapping = filesToZip;
    }
@@ -69,8 +69,8 @@
       if ([_zipDelegate respondsToSelector:@selector(updateCurrentFile:)])
          [_zipDelegate  updateCurrentFile:sourceFileName];
          
-      ZipWriteStream * writeStream = [_zipTool writeFileInZipWithName:fileinArchiveName
-                                                     compressionLevel:ZipCompressionLevelNone];
+      OZZipWriteStream * writeStream = [_zipTool writeFileInZipWithName:fileinArchiveName
+                                                     compressionLevel:OZZipCompressionLevelNone];
       if (writeStream)
       {
          [self writeStream:writeStream
@@ -297,7 +297,7 @@
 }
 
 
-- (BOOL) writeStream:(ZipWriteStream *) writeStream
+- (BOOL) writeStream:(OZZipWriteStream *) writeStream
              fromURL:(NSURL *) fileToZip
       singleFileOnly:(BOOL) singleFileOnly
 {
@@ -329,7 +329,7 @@
    }
    
    unsigned long long totalBytesWritten = 0;
-   unsigned long  bytesToRead = 1024 * 64; // read/write 64k at a time
+   unsigned long  bytesToRead = 1024 * 63; // read/write 63k at a time  64K blocks are too big.
    
    [self updateProgress:totalBytesWritten
                 forFile:fileToZip
@@ -359,15 +359,15 @@
          }
          else
          {
-            @throw [[ZipException alloc] initWithError:ZipErrorCodes.OZEC_ReadDataFailure
-                                                reason:ZipErrorCodes.OZEM_ReadDataFailure];
+            @throw [[OZZipException alloc] initWithError:ZipErrorCodes.OZEC_ReadDataFailure
+                                                  reason:ZipErrorCodes.OZEM_ReadDataFailure];
          }
          
       } while (totalBytesWritten < bytesInFile);
       
       result = YES;
    }
-   @catch (ZipException *ze)
+   @catch (OZZipException *ze)
    {
       NSString * reason = [ze reason];
       [self setErrorCode:ze.error errorMessage:reason andNotify:YES];
