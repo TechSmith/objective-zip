@@ -182,8 +182,9 @@
       FileInZipInfo * info = [_zipTool getCurrentFileInZipInfo];
       
       NSError * error  = nil;
-      if ( !self.unzipFileDelegate || [self.unzipFileDelegate includeFileWithName:info.name error:&error] )
+      if ( !self.unzipFileDelegate || [self.unzipFileDelegate includeFileWithName:info.name forDestinationURL:destinationFolder error:&error] )
       {
+         [_zipTool locateFileInZip:info.name];
          ZipReadStream * readStream = [_zipTool readCurrentFileInZip];
          
          [self extractStream:readStream
