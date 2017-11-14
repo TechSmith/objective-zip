@@ -196,6 +196,7 @@
       }
       else
       {
+         [_zipTool locateFileInZip:info.name];
          [self updateProgress:info.length
                    forFileURL:nil
                  withFileInfo:info
@@ -355,7 +356,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
       [_zipDelegate  updateCurrentFile:fullURL];
    
    // let the delegate modify the file name.  We do this in all cases, because the delegate may have its own ideas aboutwhat a collision is
-   if ( self.unzipFileDelegate )
+   if ( self.unzipFileDelegate && !singleFileOnly )
    {
       fullURL = [unzipToFolder URLByAppendingPathComponent:[self.unzipFileDelegate modifiedNameForFileName:info.name]];
    }
