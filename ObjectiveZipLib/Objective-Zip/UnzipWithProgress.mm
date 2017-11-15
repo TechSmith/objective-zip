@@ -182,8 +182,9 @@
       FileInZipInfo * info = [_zipTool getCurrentFileInZipInfo];
       
       NSError * error  = nil;
-      if ( !self.unzipFileDelegate || [self.unzipFileDelegate includeFileWithName:info.name error:&error] )
+      if ( !self.unzipFileDelegate || [self.unzipFileDelegate includeFileWithName:info.name forDestinationURL:destinationFolder error:&error] )
       {
+         [_zipTool locateFileInZip:info.name];
          ZipReadStream * readStream = [_zipTool readCurrentFileInZip];
          
          [self extractStream:readStream
@@ -195,6 +196,7 @@
       }
       else
       {
+         [_zipTool locateFileInZip:info.name];
          [self updateProgress:info.length
                    forFileURL:nil
                  withFileInfo:info
@@ -354,7 +356,7 @@ withCompletionBlock:(void(^)(NSURL * extractionFolder, NSError * error))completi
       [_zipDelegate  updateCurrentFile:fullURL];
    
    // let the delegate modify the file name.  We do this in all cases, because the delegate may have its own ideas aboutwhat a collision is
-   if ( self.unzipFileDelegate )
+   if ( self.unzipFileDelegate && !singleFileOnly )
    {
       fullURL = [unzipToFolder URLByAppendingPathComponent:[self.unzipFileDelegate modifiedNameForFileName:info.name]];
    }
