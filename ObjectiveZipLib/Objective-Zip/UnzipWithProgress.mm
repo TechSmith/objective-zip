@@ -9,9 +9,29 @@
 #import "ZipException.h"
 #import "ZipFile.h"
 #import "ZipReadStream.h"
-
 #include <set>
 
+
+namespace
+{
+   template<class A>
+   class ScopedSetter
+   {
+   public:
+      ScopedSetter(A * ptr, A newValue) : m_ptr(ptr), m_oldValue(*ptr)
+      {
+         *ptr=newValue;
+      }
+      
+      ~ScopedSetter()
+      {
+         *m_ptr=m_oldValue;
+      }
+      
+      A * m_ptr;
+      A   m_oldValue;
+   };
+}
 
 //
 // UnzipWithProgress private interface
@@ -72,7 +92,7 @@
 {
    static const unsigned long long s_freeSpaceBuffer = 1024 * 1000 * 10; // 10 MB buffer min disk space
    
-   _createNewFolder = YES;
+   ScopedSetter<BOOL> setter(&_createNewFolder, YES);
    
    BOOL result = NO;
    
